@@ -25,7 +25,6 @@ C:\!!!WORK\C#\PzProj\PzProj\bin\System.Web.Webpages.Deployment.xml
 C:\!!!WORK\C#\PzProj\PzProj\bin\System.Web.Webpages.Razor.xml
 C:\!!!WORK\C#\PzProj\PzProj\bin\System.Web.Helpers.xml
 C:\!!!WORK\C#\PzProj\PzProj\bin\System.Web.Mvc.xml
-C:\!!!WORK\C#\PzProj\PzProj\obj\Debug\PzProj.csprojResolveAssemblyReference.cache
 C:\!!!WORK\C#\PzProj\PzProj\obj\Debug\PzProj.Migrations.Initial.resources
 C:\!!!WORK\C#\PzProj\PzProj\obj\Debug\PzProj.csproj.GenerateResource.Cache
 C:\!!!WORK\C#\PzProj\PzProj\obj\Debug\PzProj.dll
