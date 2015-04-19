@@ -7,9 +7,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using MvcApplication2.Areas.HelpPage.Models;
+using PzProj.Areas.HelpPage.Models;
 
-namespace MvcApplication2.Areas.HelpPage
+namespace PzProj.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

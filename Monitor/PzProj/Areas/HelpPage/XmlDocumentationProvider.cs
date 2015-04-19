@@ -6,7 +6,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
 
-namespace MvcApplication2.Areas.HelpPage
+namespace PzProj.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
@@ -16,6 +16,7 @@ namespace MvcApplication2.Areas.HelpPage
         private XPathNavigator _documentNavigator;
         private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
         private const string ParameterExpression = "param[@name='{0}']";
+
         public virtual string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
         {
             return "";

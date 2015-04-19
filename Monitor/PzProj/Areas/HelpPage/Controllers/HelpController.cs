@@ -1,9 +1,9 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using MvcApplication2.Areas.HelpPage.Models;
+using PzProj.Areas.HelpPage.Models;
 
-namespace MvcApplication2.Areas.HelpPage.Controllers
+namespace PzProj.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.
