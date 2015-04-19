@@ -1,9 +1,8 @@
-Dla jasnoœci : tak jest to ca³y projekt Visuala. ¯eby ogarn¹æ jak dzia³a to API i WEB service restowy musia³em takowy stworzyæ i posiada on w³asn¹ konfiguracjê dla bazy danych (niestety nie mam pliku naszej, wiêæ musia³em lekko improwizowaæ i stworzy³em póki co logikê (kontrollery, odpowiadaj¹ce im obiekty itd...) dla u¿ytkowników i hostów. 
+Dla jasnoÅ›ci : tak jest to caÅ‚y projekt Visuala. Å»eby ogarnÄ…Ä‡ jak dziaÅ‚a to API i WEB service restowy musiaÅ‚em takowy stworzyÄ‡ i posiada on wÅ‚asnÄ… konfiguracjÄ™ dla bazy danych (niestety nie mam pliku naszej, wiÄ™Ä‡ musiaÅ‚em lekko improwizowaÄ‡ i stworzyÅ‚em pÃ³ki co logikÄ™ (kontrollery, odpowiadajÄ…ce im obiekty itd...) dla uÅ¼ytkownikÃ³w i hostÃ³w. 
 
-po odpaleniu ( ja mam VS 12  ale zalecana jest raczej 13+ - niektóre funkcje mi nie dzia³aj¹ i straci³êm przez to sporo czasu bo da siê trochê rzeczy robiæ mniej manualnie) 
-je¿eli pojawi siê strona g³ówna to mo¿na odpytywaæ serwer poprzez dopisanie 
+po odpaleniu ( ja mam VS 12  ale zalecana jest raczej 13+ - niektÃ³re funkcje mi nie dziaÅ‚ajÄ… i straciÅ‚Ä™m przez to sporo czasu bo da siÄ™ trochÄ™ rzeczy robiÄ‡ mniej manualnie) 
+jeÅ¼eli pojawi siÄ™ strona gÅ‚Ã³wna to moÅ¼na odpytywaÄ‡ serwer poprzez dopisanie 
 
 api/hosts api/hosts/1 itd
 api/users api/users/1 itd.
 
-Postaram siê jak najszybciej doprowadziæ do ³adu narzêdzie ³adnie pokazuj¹ce API (póki co link Api nie dzia³a).
