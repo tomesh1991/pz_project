@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pzProjDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="hosts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ip_addr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="measurements" Relationship="Self.FK_measurements_hosts" FromRole="hosts" ToRole="measurements" />
+  </EntityType>
+  <EntityType Name="measurements">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="host_id" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="load_cpu" Type="Int16" Nullable="false" />
+    <Property Name="load_mem" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="hosts" Relationship="Self.FK_measurements_hosts" FromRole="measurements" ToRole="hosts" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="superuser" Type="Int16" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="views" Relationship="Self.FK_views_users" FromRole="users" ToRole="views" />
+  </EntityType>
+  <EntityType Name="syslog">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="timestamp" />
+      <PropertyRef Name="event" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="event" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="views">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="view_query" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="view_query" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="users" Relationship="Self.FK_views_users" FromRole="views" ToRole="users" />
+  </EntityType>
+  <Association Name="FK_measurements_hosts">
+    <End Role="hosts" Type="Self.hosts" Multiplicity="1" />
+    <End Role="measurements" Type="Self.measurements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hosts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="measurements">
+        <PropertyRef Name="host_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_views_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="views" Type="Self.views" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="views">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="pzProjDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="hosts" EntityType="Self.hosts" />
+    <EntitySet Name="measurements" EntityType="Self.measurements" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <EntitySet Name="syslog" EntityType="Self.syslog" />
+    <EntitySet Name="views" EntityType="Self.views" />
+    <AssociationSet Name="FK_measurements_hosts" Association="Self.FK_measurements_hosts">
+      <End Role="hosts" EntitySet="hosts" />
+      <End Role="measurements" EntitySet="measurements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_views_users" Association="Self.FK_views_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="views" EntitySet="views" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

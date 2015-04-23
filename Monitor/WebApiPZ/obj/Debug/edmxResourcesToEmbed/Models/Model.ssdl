@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pzProjDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="hosts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ip_addr" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="measurements">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="host_id" Type="int" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="load_cpu" Type="smallint" Nullable="false" />
+    <Property Name="load_mem" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\!!!WORK\C#\WEBAPIPZ\WEBAPIPZ\APP_DATA\PZPROJDB.MDF.dbo.syslog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="syslog">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="timestamp" />
+      <PropertyRef Name="event" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="event" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="superuser" Type="smallint" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\!!!WORK\C#\WEBAPIPZ\WEBAPIPZ\APP_DATA\PZPROJDB.MDF.dbo.views' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="views">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="view_query" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+    <Property Name="view_query" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_measurements_hosts">
+    <End Role="hosts" Type="Self.hosts" Multiplicity="1" />
+    <End Role="measurements" Type="Self.measurements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hosts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="measurements">
+        <PropertyRef Name="host_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_views_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="views" Type="Self.views" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="views">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="pzProjDBModelStoreContainer">
+    <EntitySet Name="hosts" EntityType="Self.hosts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="measurements" EntityType="Self.measurements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="syslog" EntityType="Self.syslog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [syslog].[id] AS [id], 
+    [syslog].[timestamp] AS [timestamp], 
+    [syslog].[event] AS [event]
+    FROM [dbo].[syslog] AS [syslog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="views" EntityType="Self.views" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [views].[id] AS [id], 
+    [views].[user_id] AS [user_id], 
+    [views].[type] AS [type], 
+    [views].[view_query] AS [view_query], 
+    [views].[status] AS [status]
+    FROM [dbo].[views] AS [views]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_measurements_hosts" Association="Self.FK_measurements_hosts">
+      <End Role="hosts" EntitySet="hosts" />
+      <End Role="measurements" EntitySet="measurements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_views_users" Association="Self.FK_views_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="views" EntitySet="views" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
