@@ -1,0 +1,7 @@
+packages/
+PzProj/bin/
+PzProj/obj/
+*.suo
+*.user
+WebApiPZ/bin/
+WebApiPZ/obj/
