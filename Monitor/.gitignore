@@ -1,7 +1,7 @@
-packages/
-PzProj/bin/
-PzProj/obj/
 *.suo
 *.user
-WebApiPZ/bin/
-WebApiPZ/obj/
+packages*
+PzProj/bin*
+PzProj/obj*
+WebApiPZ/bin*
+WebApiPZ/obj*
