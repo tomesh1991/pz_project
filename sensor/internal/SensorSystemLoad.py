@@ -18,18 +18,15 @@ class SensorSystemLoad(SensorBase):
             'cpuUtilization' : self.cpuUtilization
         }
         # TUTAJ ROBIMY POSTA
-        url = 'http://localhost:1548/api/measurements'
+        url = 'http://localhost:52123/api/Measurements'
         data = {
-            "id": self.i,
             "host_id": repr(get_mac()),
-            "timestamp": repr(time.time()),
             "load_cpu": repr(self.cpuUtilization),
             "load_mem": repr(self.freeMemory),
-            "hosts": {
-                "id": repr(get_mac()),
+            "host": {
+                "unique_id": repr(get_mac()),
                 "name": options.hostname,
                 "ip_addr": "127.0.0.1",
-                "status": "running",
                 "measurements": []
             }
         }
