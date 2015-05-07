@@ -1,5 +1,5 @@
 {
-	"frequency" : "2.0",
+	"frequency" : "0.2",
 	"hostname" : "Host-A",
 	"sensorname" : "System Load1",
 	"username" : "admin",

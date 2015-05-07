@@ -45,10 +45,12 @@ namespace PzProj.Controllers
             Measurements meas = new Measurements();
 
             Hosts host = db.Hosts.FirstOrDefault(h => h.unique_id ==  item.host.unique_id);
-            
-            if(host == null)
-                host = new Hosts { unique_id = item.host.unique_id };
 
+            if (host == null)
+            {
+                host = new Hosts { unique_id = item.host.unique_id };
+                db.Hosts.Add(host);
+            }
 
             if(host.name != item.host.name)
                 host.name = item.host.name;
@@ -56,7 +58,7 @@ namespace PzProj.Controllers
             if(host.ip_addr != item.host.ip_addr)
                 host.ip_addr = item.host.ip_addr;
 
-            db.Hosts.Add(host);
+            
             meas.host = host;
             meas.load_cpu = item.load_cpu;
             meas.load_mem = item.load_mem;
