@@ -67,19 +67,21 @@ namespace PzProj.Migrations
             context.Hosts.AddOrUpdate(p => p.ip_addr, hosts);
 
             
-            MeasurTypes [] types = new MeasurTypes []
+            SimpleMeasurTypes [] types = new SimpleMeasurTypes []
             {
-                new MeasurTypes
+                new SimpleMeasurTypes
                {
                    description = "Obci¹¿enie procesora",
                    id = 1,
-                   name = "CPU"
+                   name = "CPU",
+                   unique_sensor_id = 12321
                },
-                new MeasurTypes
+                new SimpleMeasurTypes
                 {
                     description = "Zu¿ycie pamiêci",
                     id = 2,
-                    name = "RAM"
+                    name = "RAM",
+                    unique_sensor_id = 32123
                 }
              };
             context.MeasurTypes.AddOrUpdate(mt => mt.id, types);

@@ -7,14 +7,14 @@ using System.Web;
 
 namespace PzProj.Models
 {
-
+    [Table("hosts")]
     public class Measurements
     {
         [Key]
         public int id { get; set; }
         public virtual Hosts host { get; set; }
-        public int load_cpu { get; set; }
-        public int load_mem { get; set; }
-
+        public virtual SimpleMeasurTypes simple { get; set; }
+        public int Value { get; set; }
+        public DateTime time { get; set; }
     }
 }

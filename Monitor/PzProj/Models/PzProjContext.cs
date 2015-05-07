@@ -25,7 +25,7 @@ namespace PzProj.Models
 
         public System.Data.Entity.DbSet<PzProj.Models.Hosts> Hosts { get; set; }
         public System.Data.Entity.DbSet<PzProj.Models.Measurements> Measurements { get; set; }
-        public System.Data.Entity.DbSet<PzProj.Models.MeasurTypes> MeasurTypes { get; set; }
+        public System.Data.Entity.DbSet<PzProj.Models.SimpleMeasurTypes> MeasurTypes { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

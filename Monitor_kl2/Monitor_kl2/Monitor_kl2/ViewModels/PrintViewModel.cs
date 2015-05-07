@@ -66,7 +66,7 @@ namespace Monitor_kl2.ViewModels
 
             bool color = false ;
 
-            var rows = _hostList.Select(host => GenerateRow(host));
+           // var rows = _hostList.Select(host => GenerateRow(host));
 
             foreach (Host h in _hostList)
             {

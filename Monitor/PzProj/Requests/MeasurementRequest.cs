@@ -8,8 +8,7 @@ namespace PzProj.Requests
     public class MeasurementRequest
     {
         public virtual  HostRequest host {get ; set; }
-        public int load_cpu { get; set; }
-        public int load_mem { get; set; }
-
+        public int SensorUniqueId { get; set; }
+        public int Value { get; set; }
     }
 }
