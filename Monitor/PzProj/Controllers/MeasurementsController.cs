@@ -15,16 +15,16 @@ namespace PzProj.Controllers
         private PzProjContext db = new PzProjContext();
 
         // GET api/Measurements     
-        public IQueryable<Measurements> GetMeasurements()
+        public IQueryable<Measurement> GetMeasurements()
         {
             return db.Measurements;
         }
 
         // GET api/Hosts/5
-        [ResponseType(typeof(Measurements))]
+        [ResponseType(typeof(Measurement))]
         public IHttpActionResult GetMeasurements(int id)
         {
-            Measurements ms = db.Measurements.Find(id);
+            Measurement ms = db.Measurements.Find(id);
             if (ms == null)
             {
                 return NotFound();
@@ -34,34 +34,39 @@ namespace PzProj.Controllers
         }
 
         // POST api/Users
-        [ResponseType(typeof(Users))]
+        [ResponseType(typeof(Measurement))]
+
         public IHttpActionResult PostMeasurements(MeasurementRequest item)
         {
-            if (item == null)
+            if (item == null || item.host == null || item.SensorUniqueId == null)
             {
                 return BadRequest(ModelState);
             }
 
-            Measurements meas = new Measurements();
 
-            Hosts host = db.Hosts.FirstOrDefault(h => h.unique_id ==  item.host.unique_id);
+            var simpleMes = db.SimpleMeasureType.FirstOrDefault(s => s.unique_sensor_id == item.SensorUniqueId);
+            if (simpleMes == null)
+                return BadRequest(ModelState);
+
+            Measurement meas = new Measurement();
+
+            Host host = db.Hosts.FirstOrDefault(h => h.unique_id == item.host.unique_id);
+
+
 
             if (host == null)
             {
-                host = new Hosts { unique_id = item.host.unique_id };
+                host = new Host { unique_id = item.host.unique_id };
                 db.Hosts.Add(host);
             }
 
-            if(host.name != item.host.name)
-                host.name = item.host.name;
+            host.ip_addr = item.UserHostAddress;
+            host.name = item.host.name;
 
-            if(host.ip_addr != item.host.ip_addr)
-                host.ip_addr = item.host.ip_addr;
 
-            
-            meas.host = host;
-            meas.load_cpu = item.load_cpu;
-            meas.load_mem = item.load_mem;
+            meas.Host = host;
+            meas.SimpleMeasure = simpleMes;
+
 
             db.Measurements.Add(meas);
             db.SaveChanges();
