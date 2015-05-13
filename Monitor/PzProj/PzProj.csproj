@@ -170,11 +170,11 @@
       <DependentUpon>201504182353406_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Hosts.cs" />
-    <Compile Include="Models\Measurements.cs" />
-    <Compile Include="Models\MeasurTypes.cs" />
+    <Compile Include="Models\Host.cs" />
+    <Compile Include="Models\Measurement.cs" />
     <Compile Include="Models\PzProjContext.cs" />
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\SimpleMeasureType.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\HostRequest.cs" />
     <Compile Include="Requests\MeasurementRequest.cs" />

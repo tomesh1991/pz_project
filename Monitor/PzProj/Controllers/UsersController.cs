@@ -17,16 +17,16 @@ namespace PzProj.Controllers
         private PzProjContext db = new PzProjContext();
 
         // GET api/Users
-        public IQueryable<Users> GetUsers()
+        public IQueryable<User> GetUsers()
         {
             return db.Users;
         }
 
         // GET api/Users/5
-        [ResponseType(typeof(Users))]
+        [ResponseType(typeof(User))]
         public IHttpActionResult GetUsers(int id)
         {
-            Users users = db.Users.Find(id);
+            User users = db.Users.Find(id);
             if (users == null)
             {
                 return NotFound();
@@ -36,7 +36,7 @@ namespace PzProj.Controllers
         }
 
         // PUT api/Users/5
-        public IHttpActionResult PutUsers(int id, Users users)
+        public IHttpActionResult PutUsers(int id, User users)
         {
             if (!ModelState.IsValid)
             {
@@ -70,8 +70,8 @@ namespace PzProj.Controllers
         }
 
         // POST api/Users
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult PostUsers(Users users)
+        [ResponseType(typeof(User))]
+        public IHttpActionResult PostUsers(User users)
         {
             if (!ModelState.IsValid)
             {
@@ -85,10 +85,10 @@ namespace PzProj.Controllers
         }
 
         // DELETE api/Users/5
-        [ResponseType(typeof(Users))]
+        [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUsers(int id)
         {
-            Users users = db.Users.Find(id);
+            User users = db.Users.Find(id);
             if (users == null)
             {
                 return NotFound();

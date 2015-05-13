@@ -21,7 +21,7 @@ namespace PzProj.Models
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
-        public System.Data.Entity.DbSet<Users> Users { get; set; }
+        public System.Data.Entity.DbSet<User> Users { get; set; }
 
         public System.Data.Entity.DbSet<Host> Hosts { get; set; }
         public System.Data.Entity.DbSet<Measurement> Measurements { get; set; }

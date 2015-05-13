@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PzProj.Models
 {   
-    [Table("users")]
-    public class Users
+    [Table("user")]
+    public class User
     {
         [Key]
         public int id { get; set; }

@@ -29,14 +29,14 @@ namespace PzProj.Migrations
             //
 
             context.Users.AddOrUpdate(p => p.login, 
-                new PzProj.Models.Users{
+                new PzProj.Models.User{
                     id=1,
                     login="Pierwszy",
                     mail="pierwszy@asd.pl",
                     password="Fitst",
                     status="good",
                     superuser=0},
-                new PzProj.Models.Users{
+                new PzProj.Models.User{
                     id=2,
                     login="Pierwszy2",
                     mail="pierwsz22y@asd.pl",
