@@ -81,7 +81,7 @@ namespace PzProj.Migrations
                     description = "Zu¿ycie pamiêci",
                     id = 2,
                     name = "RAM",
-                    unique_sensor_id = 32123
+                    unique_sensor_id = 2568157
                 }
              };
             context.SimpleMeasureType.AddOrUpdate(mt => mt.id, types);
