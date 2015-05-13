@@ -8,7 +8,6 @@ namespace PzProj.Requests
     public class HostRequest
     {
         public string name { get; set; }
-        public string ip_addr { get; set; }
         public long unique_id { get; set; }
     }
 }

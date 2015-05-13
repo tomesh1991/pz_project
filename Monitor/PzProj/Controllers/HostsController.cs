@@ -17,16 +17,16 @@ namespace PzProj.Controllers
         private PzProjContext db = new PzProjContext();
 
         // GET api/Hosts
-        public IQueryable<Hosts> GetHosts()
+        public IQueryable<Host> GetHosts()
         {
             return db.Hosts;
         }
 
         // GET api/Hosts/5
-        [ResponseType(typeof(Hosts))]
+        [ResponseType(typeof(Host))]
         public IHttpActionResult GetHosts(int id)
         {
-            Hosts hosts = db.Hosts.Find(id);
+            Host hosts = db.Hosts.Find(id);
             if (hosts == null)
             {
                 return NotFound();

@@ -7,8 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PzProj.Models
 {   
-    [Table("hosts")]
-    public class Hosts
+    [Table("host")]
+    public class Host
+
     {
         [Key]
         public int id { get; set; }
@@ -16,5 +17,6 @@ namespace PzProj.Models
         public string ip_addr { get; set; }
         public long unique_id { get; set; }
 
+        public virtual ICollection<Measurement> Measurements { get; set; }
     }
 }

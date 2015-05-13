@@ -45,16 +45,16 @@ namespace PzProj.Migrations
                     superuser=0});
 
 
-            Hosts[] hosts = new Hosts[]
+            Host[] hosts = new Host[]
             {
-                new PzProj.Models.Hosts
+                new PzProj.Models.Host
                 {
                     id=1,
                     ip_addr="127.0.0.1",
                     name="first"//,
                   //  status="good"
                 },
-                new Hosts
+                new Host
                 {
                     id=2,
                     ip_addr="127.0.0.2",
@@ -67,16 +67,16 @@ namespace PzProj.Migrations
             context.Hosts.AddOrUpdate(p => p.ip_addr, hosts);
 
             
-            SimpleMeasurTypes [] types = new SimpleMeasurTypes []
+            SimpleMeasureType [] types = new SimpleMeasureType []
             {
-                new SimpleMeasurTypes
+                new SimpleMeasureType
                {
                    description = "Obci¹¿enie procesora",
                    id = 1,
                    name = "CPU",
                    unique_sensor_id = 12321
                },
-                new SimpleMeasurTypes
+                new SimpleMeasureType
                 {
                     description = "Zu¿ycie pamiêci",
                     id = 2,
@@ -84,7 +84,7 @@ namespace PzProj.Migrations
                     unique_sensor_id = 32123
                 }
              };
-            context.MeasurTypes.AddOrUpdate(mt => mt.id, types);
+            context.SimpleMeasureType.AddOrUpdate(mt => mt.id, types);
 
 
             

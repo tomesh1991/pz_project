@@ -21,19 +21,22 @@ namespace PzProj.Models
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
-        public System.Data.Entity.DbSet<PzProj.Models.Users> Users { get; set; }
+        public System.Data.Entity.DbSet<Users> Users { get; set; }
 
-        public System.Data.Entity.DbSet<PzProj.Models.Hosts> Hosts { get; set; }
-        public System.Data.Entity.DbSet<PzProj.Models.Measurements> Measurements { get; set; }
-        public System.Data.Entity.DbSet<PzProj.Models.SimpleMeasurTypes> MeasurTypes { get; set; }
+        public System.Data.Entity.DbSet<Host> Hosts { get; set; }
+        public System.Data.Entity.DbSet<Measurement> Measurements { get; set; }
+        public System.Data.Entity.DbSet<SimpleMeasureType> SimpleMeasureType { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Measurements>().HasRequired(m => m.host);
-            //modelBuilder.Entity<Measurements>().HasRequired(m => m.type);
+            modelBuilder.Entity<Host>()
+                 .HasMany(h => h.Measurements)
+                 .WithRequired(m => m.Host)
+                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<Measurement>().HasRequired(m => m.SimpleMeasure);
+            base.OnModelCreating(modelBuilder);
         }
 
     }

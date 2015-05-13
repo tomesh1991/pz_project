@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PzProj.Requests
 {
-    public class MeasurementRequest
+    public class MeasurementRequest : HttpRequestBase
     {
         public virtual  HostRequest host {get ; set; }
         public int SensorUniqueId { get; set; }
