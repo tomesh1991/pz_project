@@ -19,9 +19,14 @@ namespace PzProj.Controllers
         private PzProjContext db = new PzProjContext();
 
         // GET api/Measurements     
-        public IQueryable<Measurement> GetMeasurements()
+        public IQueryable<MeasureTypeResponse> GetMeasurements()
         {
-            return db.Measurements;
+            return db.SimpleMeasureType
+                .Select(sm => 
+                    new MeasureTypeResponse 
+                    { id = sm.id, 
+                        description = sm.description, 
+                        name = sm.name });
         }
 
         /// <summary>

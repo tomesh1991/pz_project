@@ -182,6 +182,7 @@
     <Compile Include="Requests\MeasurementRequest.cs" />
     <Compile Include="Respons\HostResponse.cs" />
     <Compile Include="Respons\MeasurementResponse.cs" />
+    <Compile Include="Respons\MeasureTypeResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
