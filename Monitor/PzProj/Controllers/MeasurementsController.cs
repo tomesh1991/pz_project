@@ -13,12 +13,20 @@ using PzProj.Respons;
 
 namespace PzProj.Controllers
 {
+
+    /// <summary>
+    /// Pomiary proste
+    /// </summary>
     public class MeasurementsController
      : ApiController
     {
         private PzProjContext db = new PzProjContext();
 
-        // GET api/Measurements     
+        /// <summary>
+        /// Lista pomiarów prostych / sensorów zarejestrowanych w monitorze
+        /// </summary>
+        /// <returns></returns>
+ 
         public IQueryable<MeasureTypeResponse> GetMeasurements()
         {
             return db.SimpleMeasureType
@@ -30,31 +38,33 @@ namespace PzProj.Controllers
         }
 
         /// <summary>
-        /// Get Measure by Measure Type
+        /// Ostatnie 100 pomiarów prostych zarejestrowanych przez monitor
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">id pomiaru prostego</param>
         /// <returns></returns>
         [ResponseType(typeof(MeasurementResponse))]
         public IQueryable<MeasurementResponse> GetMeasuresByType(int id)
         {
 
-            return db.Measurements.Where(m => m.SimpleMeasure.id == id)
+            return db.Measurements.Where(m => m.SimpleMeasure.id == id).OrderByDescending(ms => ms.id).Take(100)
                 .Select(sm => new MeasurementResponse
                 {
-                    Host = new HostResponse { id = sm.Host.id, ip_addr = sm.Host.ip_addr, name = sm.Host.name },
-                    SimpleMeasureTypeId = sm.SimpleMeasure.id,
-                    Time = sm.time,
-                    Value = sm.Value
+                    host_id = sm.Host.id,
+                    //SimpleMeasureTypeId = sm.SimpleMeasure.id,
+                    time = sm.time,
+                    value = sm.Value
 
                 });
         }
 
-        // POST api/Users
-        [ResponseType(typeof(Measurement))]
-
+        /// <summary>
+        /// Post dla sensora
+        /// </summary>
+        /// <param name="item">pojedynczy pomiar</param>
+        /// <returns></returns>
         public IHttpActionResult PostMeasurements(MeasurementRequest item)
         {
-            if (item == null || item.host == null || item.SensorUniqueId == null)
+            if (item == null)
             {
                 return BadRequest(ModelState);
             }
@@ -66,18 +76,18 @@ namespace PzProj.Controllers
 
             Measurement meas = new Measurement();
 
-            Host host = db.Hosts.FirstOrDefault(h => h.unique_id == item.host.unique_id);
+            Host host = db.Hosts.FirstOrDefault(h => h.unique_id == item.Host.unique_id);
 
 
 
             if (host == null)
             {
-                host = new Host { unique_id = item.host.unique_id };
+                host = new Host { unique_id = item.Host.unique_id };
                 db.Hosts.Add(host);
             }
 
-            host.ip_addr = GetClientIp(item);
-            host.name = item.host.name;
+            host.ip_addr = HttpContext.Current.Request.UserHostAddress;
+            host.name = HttpContext.Current.Request.UserHostName;
 
 
             meas.Host = host;

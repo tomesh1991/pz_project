@@ -6,10 +6,14 @@ using System.Web;
 
 namespace PzProj.Requests
 {
-    public class MeasurementRequest : HttpRequestMessage 
+    public class MeasurementRequest  
     {
-        public virtual  HostRequest host {get ; set; }
+        public virtual  HostRequest Host {get ; set; }
+        
+        // Id sensora, przydzielany dla każdego sensora osobno, niezmienny
         public int SensorUniqueId { get; set; }
+
+        // Wartość procentowa obciążenia
         public int Value { get; set; }
     }
 }

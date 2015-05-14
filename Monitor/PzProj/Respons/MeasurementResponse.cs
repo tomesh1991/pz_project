@@ -7,9 +7,12 @@ namespace PzProj.Respons
 {
     public class MeasurementResponse
     {
-        public virtual HostResponse Host { get; set; }
-        public int SimpleMeasureTypeId {get; set; }
-        public DateTime Time { get; set; }
-        public int Value { get; set; }
+        public int host_id  { get; set; }
+        //public int SimpleMeasureTypeId {get; set; }
+        public DateTime time { get; set; }
+        /// <summary>
+        /// Wartość obciążenia
+        /// </summary>
+        public int value { get; set; }
     }
 }
