@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.ServiceModel.Channels;
 using System.Web;
@@ -8,6 +9,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using PzProj.Models;
 using PzProj.Requests;
+using PzProj.Respons;
 
 namespace PzProj.Controllers
 {
@@ -22,17 +24,24 @@ namespace PzProj.Controllers
             return db.Measurements;
         }
 
-        // GET api/Hosts/5
-        [ResponseType(typeof(Measurement))]
-        public IHttpActionResult GetMeasurements(int id)
+        /// <summary>
+        /// Get Measure by Measure Type
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(MeasurementResponse))]
+        public IQueryable<MeasurementResponse> GetMeasuresByType(int id)
         {
-            Measurement ms = db.Measurements.Find(id);
-            if (ms == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(ms);
+            return db.Measurements.Where(m => m.SimpleMeasure.id == id)
+                .Select(sm => new MeasurementResponse
+                {
+                    Host = new HostResponse { id = sm.Host.id, ip_addr = sm.Host.ip_addr, name = sm.Host.name },
+                    SimpleMeasureTypeId = sm.SimpleMeasure.id,
+                    Time = sm.time,
+                    Value = sm.Value
+
+                });
         }
 
         // POST api/Users
@@ -73,7 +82,7 @@ namespace PzProj.Controllers
             db.Measurements.Add(meas);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = meas.id }, meas);
+            return Ok();
         }
 
 
