@@ -36,15 +36,20 @@ class SensorUtil():
             data = {
                 "host": {
                     "name": self.config.name,
-                    "unique_id": repr(get_mac())
+                    "unique_id": self.config.hostUniqueId
                 },
-                "SensorUniqueId": self.config.sensorUniqueId,
+                "SensorUniqueId": self.config.sensorId,
                 "Value": value
             }
-            r = requests.post(self.url, data=json.dumps(data), headers=self.headers, )
-
+            try:
+                r = requests.post(self.url, data=json.dumps(data), headers=self.headers, )
+            except:
+                print("Monitor is not responding, next connection attempt in 10 seconds\n")
+                sleep(10.0)
+                continue
             print(repr(data) + " Sent...")
             print(r.status_code)
+
             sleep(self.interval)
 
     def CPU(self):

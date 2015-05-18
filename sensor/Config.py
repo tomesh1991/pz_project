@@ -1,9 +1,13 @@
+import os
 from random import randint
 
 class Config:
-    frequency = 2.0
+    def __init__(self):
+        self.hostUniqueId = os.popen('wmic baseboard get serialnumber').read()[18:]
+        print(self.hostUniqueId)
+    frequency = 1.0/60.0
     monitorUrl = "http://localhost:1548/api/measurements"
     name = "SUPAKOMPJUTA"
-    sensorUniqueId = repr(randint(0, 10000000))
+    sensorId = randint(0,10000000)
     # util/MEM - %pamięć, util/CPU - %CPU
     sensorType = "util/MEM"

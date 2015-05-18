@@ -6,9 +6,7 @@ if __name__ == "__main__":
     config = Config()
     sensor = SensorUtil(config)
 
-    try:
-        sensor.isRunning = True
-        sensor.run()
-    except:
-        sensor.stop()
-        print("\n UPS...\n")
+    sensor.isRunning = True
+    sensor.run()
+    sensor.stop()
+    print("\n UPS...\n")
