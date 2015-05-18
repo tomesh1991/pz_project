@@ -3,7 +3,7 @@ from random import randint
 
 class Config:
     def __init__(self):
-        self.hostUniqueId = os.popen('wmic baseboard get serialnumber').read()[18:]
+        self.hostUniqueId = os.popen('wmic baseboard get serialnumber').read().split()[1]
         print(self.hostUniqueId)
     frequency = 1.0/60.0
     monitorUrl = "http://localhost:1548/api/measurements"
