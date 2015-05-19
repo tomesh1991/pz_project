@@ -1,8 +1,0 @@
-*.suo
-*.user
-.nuget
-packages*
-PzProj/bin*
-PzProj/obj*
-WebApiPZ/bin*
-WebApiPZ/obj*
