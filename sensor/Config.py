@@ -9,5 +9,5 @@ class Config:
     monitorUrl = "http://localhost:1548/api/measurements"
     name = "SUPAKOMPJUTA"
     sensorId = randint(0,10000000)
-    # util/MEM - %pamięć, util/CPU - %CPU
+    # util/MEM - pamiec util/CPU - %CPU
     sensorType = "util/MEM"
