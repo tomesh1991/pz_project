@@ -26,7 +26,7 @@ namespace PzProj.Models
         public System.Data.Entity.DbSet<Host> Hosts { get; set; }
         public System.Data.Entity.DbSet<Measurement> Measurements { get; set; }
         public System.Data.Entity.DbSet<SimpleMeasureType> SimpleMeasureType { get; set; }
-
+        public DbSet<AdvanceMeasure> AdvanceMeasure { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,6 +36,9 @@ namespace PzProj.Models
                  .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Measurement>().HasRequired(m => m.SimpleMeasure);
+
+            modelBuilder.Entity<AdvanceMeasure>().HasRequired(am => am.SimpleMeasureType);
+            modelBuilder.Entity<AdvanceMeasure>().HasRequired(am => am.User);
             base.OnModelCreating(modelBuilder);
         }
 
