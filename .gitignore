@@ -211,3 +211,4 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 
 .nuget
+__pycache__*
