@@ -14,6 +14,12 @@ namespace PzProj.Controllers
         private PzProjContext db = new PzProjContext();
 
         // nie wiem czy działa, można uprościć
+        /// <summary>
+        /// Pobiera pomiary złożone
+        /// </summary>
+        /// <param name="id">id pomiaru złożonego</param>
+        /// <param name="dateTime">data od kiedy wyliczać</param>
+        /// <returns></returns>
         [ResponseType(typeof(MeasurementResponse))]
         public IHttpActionResult GetAdvMeasurements(int id, DateTime dateTime)
         {
