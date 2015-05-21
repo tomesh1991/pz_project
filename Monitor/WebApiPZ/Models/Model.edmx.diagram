@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cad97b8299914b52abbe2a6b75b719fa" Name="Diagram1">
+        <EntityTypeShape EntityType="pzProjDBModel.hosts" Width="1.5" PointX="1" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pzProjDBModel.measurements" Width="1.5" PointX="3.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pzProjDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pzProjDBModel.users" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="pzProjDBModel.syslog" Width="1.5" PointX="5.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pzProjDBModel.views" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="pzProjDBModel.FK_measurements_hosts" ManuallyRouted="false" />
+        <AssociationConnector Association="pzProjDBModel.FK_views_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
