@@ -31,8 +31,10 @@ class SensorUtil():
             value = None
             if self.config.sensorType == "util/MEM":
                 value = self.MEM()
+                self.config.sensorId = 2568157
             if self.config.sensorType == "util/CPU":
                 value = self.CPU()
+                self.config.sensorId = 12321
             data = {
                 "host": {
                     "name": self.config.name,
