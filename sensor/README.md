@@ -1,28 +1,14 @@
-# Sensors
+W pliku Config.py są ustawienia, uruchamiamy plik sensor.py
 
-Passive Uninterrupted Host Watcher - sensors
+ID hosta jest generowane z unikalnego id płyty głównej komputera, to się raczej nie powtórzy.
 
-### Requirements
+Responder służy tylko do testów! Jeżeli będzie działał monitor NIE WŁĄCZAMY RESPONDERA!
+Jeżeli chcemy potestować najpierw włączamy responder, potem sensor.py
 
-Python 3.4  
-psutil - https://pythonhosted.org/psutil/ 
+UWAGA!!!
+Ten sensor działa tylko pod windowsem, id płyty głównej wykrywa się inaczej pod linuchem.
+Jeśli będzie trzeba zrobić też linucha proszę o info w jakim issue.
 
-    1. Install Python 3.4  
-    2. Install psutil
-      a) download it or use pip and skip the rest of points.
-      b) cd psutil-2.1.1; setup.py build  
-      c) setup.py install  
-  
+Instalacja biliotek:
+Wybranie opcji "installl from requriements.txt" w menu kontekstowym visual studio (ultimate + python tools)
 
-
-### Running
-
-In order to run examples type in console  
-```bash
-bash run-system-load.sh  
-or  
-bash run-system-info.sh  
-or  
-bash run-network-info.sh
-```
-You need to set PYTHONPATH variable too. It should point to directory with UDP_communication scripts.
