@@ -43,18 +43,25 @@ namespace PzProj.Controllers
         /// <param name="id">id pomiaru prostego</param>
         /// <returns></returns>
         [ResponseType(typeof(MeasurementResponse))]
-        public IQueryable<MeasurementResponse> GetMeasuresByType(int id)
+        public IQueryable<MeasurementResponse> GetMeasuresByType(int id,string hostName = null)
         {
 
-            return db.Measurements.Where(m => m.SimpleMeasure.id == id).OrderByDescending(ms => ms.id).Take(100)
-                .Select(sm => new MeasurementResponse
+            var queryable = db.Measurements.Where(m => m.SimpleMeasure.id == id);
+               
+
+            if (!string.IsNullOrEmpty(hostName))
+            {
+                queryable = queryable.Where(x => x.Host.name == hostName);
+            }
+
+            return queryable.OrderByDescending(ms => ms.id).Take(100).Select(sm => new MeasurementResponse
                 {
                     host_id = sm.Host.id,
                     //SimpleMeasureTypeId = sm.SimpleMeasure.id,
                     time = sm.time,
                     value = sm.Value
 
-                });
+                });;
         }
 
         /// <summary>

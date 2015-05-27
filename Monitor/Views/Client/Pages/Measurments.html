@@ -5,11 +5,13 @@
 </head>
 <body>
     <div>
-        <h1>Typ pomiaru</h1>
+        <h1>Filtry:</h1>
         <form>
-        <input type="radio" name="radioG" value="1" id="radioCpu" onclick="radioClick(1);" checked /> CPU
-        <input type="radio" name="radioG" id="radioRam" value="2" onclick="radioClick(2);"/> RAM
+        <input type="radio" name="radioG" value="1" id="radioCpu" checked /> CPU
+        <input type="radio" name="radioG" id="radioRam" value="2" /> RAM
         </form>
+         Nazwa hosta<input type="text" id="hostname" />
+        <input type="button" value="Sprawdź" onclick="getMeasurmentsFilter();" /> 
     </div>
     <div>
         <h2>Pomiary</h2>
@@ -44,15 +46,34 @@
 
     $(document).ready(function () {
       // Send an AJAX request
-        getMeasurments(1);
+        getMeasurments(1,"");
     });
 
-    function getMeasurments(value) {
+    function getMeasurmentsFilter() {
+        var value =0;
+        var cpuChecked = $('#radioCpu').is(":checked");
+        if (cpuChecked)
+            value = 1;
+        else
+            value = 2;
+        var host = $('#hostname').val();
+        console.log(host);
+
+        getMeasurments(value, host);
+    }
+
+    function getMeasurments(value,hostName) {
         $('#measb tr').remove();
-        $.getJSON(uri + '/'+value)
+        console.log('value' + value);
+        var localUri = uri;
+        localUri += '?id=' + value;
+        //localUri += '/1';
+        localUri += '&hostName=' + hostName;
+        
+        $.getJSON(localUri)
          .done(function (data) {
-             // On success, 'data' contains a list of products.
              console.log(data);
+             // On success, 'data' contains a list of products.
              $.each(data, function (key, item) {
                  // Add a list item for the product.                
                  var row = $('<tr>').appendTo('#measb');
