@@ -58,7 +58,9 @@ namespace PzProj.Controllers
             }
 
             HostResponse resp = new HostResponse 
-            { ip_addr = host.ip_addr,
+            {
+             id=host.id,
+             ip_addr = host.ip_addr,
              name = host.name,
              Measurements = host.Measurements.Select(hm => new HostMeasReposnse { SimpleMeasureType = hm.SimpleMeasure.id, Value = hm.Value } ).ToList()
             };
