@@ -157,6 +157,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Client\Pages\AdvMeasures.html" />
     <Content Include="Views\Client\Pages\Hosts.html" />
     <Content Include="Views\Client\Pages\Measurments.html" />
     <Content Include="Views\Client\Pages\Users.html" />
@@ -200,6 +201,7 @@
     <Compile Include="Models\SimpleMeasureType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\AdvMeasurmentRequest.cs" />
     <Compile Include="Requests\HostRequest.cs" />
     <Compile Include="Requests\MeasurementRequest.cs" />
     <Compile Include="Respons\HostResponse.cs" />

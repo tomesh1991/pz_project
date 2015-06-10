@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using PzProj.Models;
 using PzProj.Respons;
+using PzProj.Requests;
 
 namespace PzProj.Controllers
 {
@@ -72,17 +73,32 @@ namespace PzProj.Controllers
 
         // POST api/AdvMeasurements
         [ResponseType(typeof(AdvanceMeasure))]
-        public IHttpActionResult PostAdvMeasurements(AdvanceMeasure AdvMeasurements)
+        public IHttpActionResult PostAdvMeasurements(AdvMeasurmentRequest dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            var advMeasurment = new AdvanceMeasure();
 
-            db.AdvanceMeasure.Add(AdvMeasurements);
+            var simpleMes = db.SimpleMeasureType.FirstOrDefault(s => s.id == dto.SimpleMeasurmentTypeId);
+            if (simpleMes == null)
+                return BadRequest(ModelState);
+
+            var user = db.Users.FirstOrDefault(x => x.id == dto.UserId);
+            if (user == null)
+                return BadRequest(ModelState);
+
+            advMeasurment.User = user;
+            advMeasurment.SimpleMeasureType = simpleMes;
+            advMeasurment.MeasureFrequency = dto.Frequency;
+            advMeasurment.MeasureLength = dto.Length;
+
+            db.AdvanceMeasure.Add(advMeasurment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = AdvMeasurements.id }, AdvMeasurements);
+            //return CreatedAtRoute("DefaultApi", new { id = AdvMeasurements.id }, AdvMeasurements);
+            return Ok();
         }
 
         // DELETE api/AdvMeasurements/5

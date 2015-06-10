@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Klient - projekt programowanie zespołowe</title>
+</head>
+<body>
+
+    <div>
+        <h2>Pomiary zlożone</h2>
+        <ul id="advmes" />
+        <table id="advmeas">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Dlugość</th>
+                    <th>Częstość</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody id="advmeasb"></tbody>
+        </table>
+    </div>
+    <form>
+        Długość <input type="time" id="inputDlugosc"/>
+        Częstość <input type="time" id="inputCzestosc"/>
+        <input type="radio" name="radioG" value="1" id="radioCpu" checked /> CPU
+        <input type="radio" name="radioG" id="radioRam" value="2" /> RAM
+        <input type="button" value="Dodaj pomiar" onclick="addAdvMs();" />
+    </form>    
+    <div>
+        <a href="../Start.html">Powrót do strony startowej</a>
+
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <style>
+        td, th, table {
+            border: 1px solid black;
+        }
+    </style>
+
+    <script>
+        var uri = '../../../api/advmeasure';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+        getAdvMes();
+    });
+     
+    function getAdvMes() {
+        $('#advmeasb tr').remove();
+
+        $.getJSON(uri)
+         .done(function (data) {
+             // On success, 'data' contains a list of products.
+             $.each(data, function (key, item) {
+                 // Add a list item for the product.
+                 //$('<li>', { text: formatItem(item) }).appendTo($('#advmeasb'));
+                 var row = $('<tr>').appendTo('#advmeasb');
+                 $('<td>', { text: item.id }).appendTo(row);
+                 $('<td>', { text: item.MeasureLength }).appendTo(row);
+                 $('<td>', { text: item.MeasureFrequency }).appendTo(row);
+                 $('<td>', { html: '<a href=javascript:deleteAM(' + item.id + ')>Usuń</a>' }).appendTo(row);
+             });
+         });
+
+    }
+
+    function formatItem(item) {
+        return 'Id: ' + item.id + ' Długość: ' + item.MeasureLength + ' Częstość: ' + item.MeasureFrequency +'<a href=javascript:deleteAM('+item.id+')>Usuń</a>';
+    }
+
+    function deleteAM(id) {
+        $.ajax({
+            url: uri + '/' + id,
+            type: "DELETE"
+        }).done(function(data){
+        getAdvMes();
+    });
+    }
+
+    function addAdvMs() {
+        var dto = new Object();
+        dto.UserId = 1;
+        dto.Length = $('#inputDlugosc').val();
+        dto.Frequency = $('#inputCzestosc').val();
+        var value = 0;
+        var cpuChecked = $('#radioCpu').is(":checked");
+        if (cpuChecked)
+            value = 1;
+        else
+            value = 2;
+        dto.SimpleMeasurmentTypeId = value;
+
+        $.post(uri, dto, function (data) {
+            getAdvMes(uri);
+        });
+
+    }
+   
+    </script>
+</body>
+</html>
