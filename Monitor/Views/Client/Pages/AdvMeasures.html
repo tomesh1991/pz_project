@@ -12,6 +12,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Rodzaj</th>
                     <th>Dlugość</th>
                     <th>Częstość</th>
                     <th> </th>
@@ -26,7 +27,22 @@
         <input type="radio" name="radioG" value="1" id="radioCpu" checked /> CPU
         <input type="radio" name="radioG" id="radioRam" value="2" /> RAM
         <input type="button" value="Dodaj pomiar" onclick="addAdvMs();" />
-    </form>    
+    </form>   
+    <div>
+        <h2>Wyniki</h2>
+        Data od : <input type="datetime-local" id="inputDataOd" />
+        <table id="res">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Dlugość</th>
+                    <th>Częstość</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody id="resb"></tbody>
+        </table>
+    </div> 
     <div>
         <a href="../Start.html">Powrót do strony startowej</a>
 
@@ -57,7 +73,9 @@
                  // Add a list item for the product.
                  //$('<li>', { text: formatItem(item) }).appendTo($('#advmeasb'));
                  var row = $('<tr>').appendTo('#advmeasb');
-                 $('<td>', { text: item.id }).appendTo(row);
+                 console.log(item);
+                 $('<td>', { html:'<a href=javascript:showAM('+ item.id+')>Zobacz</a>' }).appendTo(row);
+                 $('<td>', { text: item.SimpleMeasureType.name }).appendTo(row);
                  $('<td>', { text: item.MeasureLength }).appendTo(row);
                  $('<td>', { text: item.MeasureFrequency }).appendTo(row);
                  $('<td>', { html: '<a href=javascript:deleteAM(' + item.id + ')>Usuń</a>' }).appendTo(row);
@@ -96,6 +114,26 @@
             getAdvMes(uri);
         });
 
+    }
+
+    function showAM(id) {
+        $('#resb tr').remove();
+        var localUri = uri;
+        localUri += '?id=' + id;
+        //var dOd = $('#inputDataOd').val();
+        var dOd = document.getElementById("inputDataOd").value;
+        if (!dOd) {
+            alert('Podaj datę i czas!');
+            return;
+        }
+        console.log('data od' + dOd);
+        localUri += '&dateTime=' + dOd;
+
+        $.getJSON(localUri).done(
+            function (data) {
+                console.log(data);
+            }
+            );
     }
    
     </script>

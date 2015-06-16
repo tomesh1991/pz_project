@@ -21,7 +21,7 @@ namespace PzProj.Controllers
         // GET api/AdvMeasurements
         public IQueryable<AdvanceMeasure> GetAdvMeasurements()
         {
-            return db.AdvanceMeasure;
+            return db.AdvanceMeasure.Include(x=>x.SimpleMeasureType);
         }
 
         // GET api/AdvMeasurements/5
