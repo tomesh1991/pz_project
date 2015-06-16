@@ -9,7 +9,7 @@ namespace PzProj.Requests
     {
         public int UserId { get; set; }
         public int SimpleMeasurmentTypeId { get; set; }
-        public int Frequency { get; set; }
-        public int Length { get; set; }
+        public TimeSpan Frequency { get; set; }
+        public TimeSpan Length { get; set; }
     }
 }

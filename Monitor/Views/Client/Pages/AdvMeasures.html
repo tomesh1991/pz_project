@@ -22,15 +22,15 @@
         </table>
     </div>
     <form>
-        Czas wstecz[s] <input type="time" id="inputDlugosc"/>
-        Interwał uśrednień[s] <input type="time" id="inputCzestosc"/>
+        Długość <input type="time" id="inputDlugosc"/>
+        Częstość <input type="time" id="inputCzestosc"/>
         <input type="radio" name="radioG" value="1" id="radioCpu" checked /> CPU
         <input type="radio" name="radioG" id="radioRam" value="2" /> RAM
         <input type="button" value="Dodaj pomiar" onclick="addAdvMs();" />
     </form>   
     <div>
         <h2>Wyniki</h2>
-        Data od : <input type="datetime-local" id="inputDataOd" value=" & Now & " />
+        Data od : <input type="datetime-local" id="inputDataOd" />
         <table id="res">
             <thead>
                 <tr>
@@ -57,9 +57,6 @@
 
     <script>
         var uri = '../../../api/advmeasure';
-
-        var localTime = new Date();
-        document.getElementById("inputDataOd").value = localTime.getFullYear() + "/" +  (localTime.getMonth() + 1)  + "/" + localTime.getDate() + " " + localTime.toLocaleTimeString();
 
     $(document).ready(function () {
       // Send an AJAX request
