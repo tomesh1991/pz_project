@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PzProj.Requests
 {
-    public class MeasurementRequest  
+    public class MeasurementRequest
     {
         public virtual  HostRequest Host {get ; set; }
         

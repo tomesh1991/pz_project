@@ -91,8 +91,8 @@ namespace PzProj.Controllers
 
             advMeasurment.User = user;
             advMeasurment.SimpleMeasureType = simpleMes;
-            advMeasurment.MeasureFrequency = dto.Frequency;
-            advMeasurment.MeasureLength = dto.Length;
+            advMeasurment.MeasureFrequency = new TimeSpan(0, 0, 0, dto.Frequency, 0);
+            advMeasurment.MeasureLength = new TimeSpan(0, 0, 0, dto.Length, 0);
 
             db.AdvanceMeasure.Add(advMeasurment);
             db.SaveChanges();
