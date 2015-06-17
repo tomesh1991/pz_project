@@ -1,6 +1,9 @@
 declare -a arr=("CPU_sensor/" "MEM_sensor/")
 declare -a arr2=("util/CPU" "util/MEM")
 
+mkdir CPU_sensor;
+mkdir MEM_sensor;
+
 for ((a = 0 ; a < 2 ; a++ ));
 do
    i=${arr[$a]}
