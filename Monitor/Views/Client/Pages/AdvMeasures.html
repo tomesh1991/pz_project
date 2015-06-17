@@ -134,7 +134,14 @@
 
         $.getJSON(localUri).done(
             function (data) {
-                console.log(data);
+
+                $.each(data, function (key, item) {
+                    // Add a list item for the product.                
+                    var row = $('<tr>').appendTo('#resb');
+                    $('<td>', { text: item.host_id }).appendTo(row);
+                    $('<td>', { text: item.time }).appendTo(row);
+                    $('<td>', { text: item.value }).appendTo(row);
+                });
             }
             );
     }
