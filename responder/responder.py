@@ -32,5 +32,5 @@ def index():
 if __name__ == '__main__':
     app.run(
         host="localhost",
-        port=int("1548")
+        port=int("52123")
     )

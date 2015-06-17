@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Klient - projekt programowanie zespołowe</title>
+    <script src="Chart.min.js"></script>
 </head>
 <body>
     <div>
@@ -16,7 +17,7 @@
     <div>
         <h2>Pomiary</h2>
         <ul id="meas" />
-        <table id="meas">
+        <!-- <table id="meas">
             <thead>
                 <tr>
                     <th>host_id</th>
@@ -27,11 +28,12 @@
             <tbody id="measb">
                 
             </tbody>
-        </table>
+        </table> -->
     </div>
+    <canvas id="results" width="1500" height="500"></canvas>
+
     <div>
         <a href="../Start.html">Powrót do strony startowej</a>
-
     </div>
     <style>
         td,th,table{
@@ -41,9 +43,9 @@
 
     </style>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    
     <script>
         var uri = '../../../api/measurements';
-
     $(document).ready(function () {
       // Send an AJAX request
         getMeasurments(1,"");
@@ -68,21 +70,41 @@
         var localUri = uri;
         localUri += '?id=' + value;
         //localUri += '/1';
+        var chartdata = {
+            labels: [],
+            datasets: [
+        {
+            label: "Sensor measurements",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: []
+        }
+            ]
+        }
         localUri += '&hostName=' + hostName;
-        
+        var context = document.getElementById('results').getContext('2d');
+        var resultsChart = new Chart(context).Line(chartdata);
         $.getJSON(localUri)
          .done(function (data) {
              console.log(data);
              // On success, 'data' contains a list of products.
              $.each(data, function (key, item) {
                  // Add a list item for the product.                
-                 var row = $('<tr>').appendTo('#measb');
-                 $('<td>', { text: item.host_id }).appendTo(row);
-                 $('<td>', { text: item.time }).appendTo(row);
-                 $('<td>', { text: item.value }).appendTo(row);
+                 //var row = $('<tr>').appendTo('#measb');
+                 //console.log('Time:' + time);
+                 //$('<td>', { text: item.host_id }).appendTo(row);
+                 //$('<td>', { text: item.time }).appendTo(row);
+                 //$('<td>', { text: item.value }).appendTo(row);
                  //$('<li>', { text: formatItem(item) }).appendTo($('#users'));
+                 resultsChart.addData([item.value], item.time.toString().replace('T', ' ').replace(/\.[0-9]*$/i, ''));
              });
+             
          });
+        
 
     }
 

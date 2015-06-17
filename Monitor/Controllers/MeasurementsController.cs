@@ -54,7 +54,7 @@ namespace PzProj.Controllers
                 queryable = queryable.Where(x => x.Host.name == hostName);
             }
 
-            return queryable.OrderByDescending(ms => ms.id).Take(100).Select(sm => new MeasurementResponse
+            return queryable.OrderByDescending(ms => ms.id).Take(100).OrderBy(ms => ms.id).Select(sm => new MeasurementResponse
                 {
                     host_id = sm.Host.id,
                     //SimpleMeasureTypeId = sm.SimpleMeasure.id,
