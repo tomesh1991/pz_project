@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Monitor_kl2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using Monitor_kl2.Models;
 
 namespace Monitor_kl2
 {
@@ -16,15 +16,15 @@ namespace Monitor_kl2
         {
             Color color = Colors.White;
 
-            switch ((Host.Status)value)
+            switch ((HostModel.StatusEnum)value)
             {
-                case Host.Status.Activated:
+                case HostModel.StatusEnum.Activated:
                     color = Colors.Green;
                     break;
-                case Host.Status.Disabled:
+                case HostModel.StatusEnum.Disabled:
                     color = Colors.Red;
                     break;
-                case Host.Status.AddedToList:
+                case HostModel.StatusEnum.AddedToList:
                     color = Colors.LightSalmon;
                     break;
             }

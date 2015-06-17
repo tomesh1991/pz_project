@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PzProj.Models;
 
-namespace PzProj.Respons
+namespace DTO.Responses
 {
     public class HostResponse
     {

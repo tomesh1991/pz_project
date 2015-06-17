@@ -201,12 +201,6 @@
     <Compile Include="Models\SimpleMeasureType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\AdvMeasurmentRequest.cs" />
-    <Compile Include="Requests\HostRequest.cs" />
-    <Compile Include="Requests\MeasurementRequest.cs" />
-    <Compile Include="Respons\HostResponse.cs" />
-    <Compile Include="Respons\MeasurementResponse.cs" />
-    <Compile Include="Respons\MeasureTypeResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -233,6 +227,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{6e463529-a642-4199-ad7e-abe36fade56d}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

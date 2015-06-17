@@ -11,13 +11,11 @@ namespace Monitor_kl2.ViewModels
     public class ShellViewModel : Conductor<IScreen>.Collection.OneActive
     {
         private string _adress;
-        private IMonitorHost _monitHost;
         private readonly IWindowManager _windowManager;
 
         public ShellViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
-            _monitHost = new MonitorHost("http://localhost:52123/");
         }
 
         public string Address
@@ -38,7 +36,7 @@ namespace Monitor_kl2.ViewModels
 
         public void Connect()
         {
-            ActivateItem(new MonitorViewModel(_windowManager, _monitHost) { DisplayName = Address });
+            ActivateItem(new MonitorViewModel(_windowManager, new MonitorHost(Address)));
             NotifyOfPropertyChange(() => CanConnect);
         }
 

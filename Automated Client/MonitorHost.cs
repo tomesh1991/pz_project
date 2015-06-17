@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Caliburn.Micro;
-using Monitor_kl2.Models;
 using Monitor_kl2.Connection;
 using System.Threading.Tasks;
+using DTO.Responses;
 
 namespace Monitor_kl2
 {
     public class MonitorHost : IMonitorHost
     {
-        
 
-        private Dictionary<int, Host> _hosts;
+        private string _uri;
+        private IEnumerable<HostResponse> _host;
+        private IEnumerable<MeasureTypeResponse> _measureTypes;
         private static Random _rand = new Random(Guid.NewGuid().GetHashCode());
-        
+        private MonitorConnection _monitorConnection;
 
         public MonitorHost(string uri)
         {
-            _hosts = new Dictionary<int, Host>();
-            
-            
+            _uri = uri;
 
-            GetHosts(uri);
+            _monitorConnection = new MonitorConnection(uri);
             
             /*
             for (int i = 0; i < 100; ++i)
@@ -33,32 +32,43 @@ namespace Monitor_kl2
             }*/
         }
 
-        public Dictionary<int, Host> ActualStats()
+        public IEnumerable<HostResponse> GetActualStats()
         {
-            Refresh();
-            return _hosts;
-        }
-
-        private void Refresh()
-        {
-            for (int i = 0; i < 100; ++i)
+            try
             {
-                var host = _hosts[i];
-                host.RamUsage = _rand.Next(100);
-                host.CpuUsege = _rand.Next(100);
-                host.Hour = DateTime.Now;
+                GetHosts();
+                return _host;
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.Write(ex);
+                return Enumerable.Empty<HostResponse>();
             }
         }
 
-        private async void GetHosts(string uri)
+
+        private async void GetHosts()
         {
-            MonitorConnection monitorConnection = new MonitorConnection();
-            List<Host> hosts = await monitorConnection.GetHosts(uri);
-            int i = 0;
-            foreach (Host host in hosts)
+            
+            _host = await _monitorConnection.GetHosts();
+        }
+
+        public async void GetMeasureTypesAsync()
+        {
+            _measureTypes = await _monitorConnection.GetMeasureTypes();
+        }
+
+        public IEnumerable<MeasureTypeResponse> GetMeasureTypes()
+        {
+            try
             {
-                _hosts.Add(i, host);
-                i++;
+                GetMeasureTypesAsync();
+                return _measureTypes;
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.Write(ex);
+                return null;
             }
         }
     }

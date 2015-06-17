@@ -8,8 +8,8 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PzProj.Models;
-using PzProj.Requests;
-using PzProj.Respons;
+using DTO.Responses;
+using DTO.Requests;
 
 namespace PzProj.Controllers
 {

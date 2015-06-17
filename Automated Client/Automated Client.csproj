@@ -116,7 +116,7 @@
     </Compile>
     <Compile Include="HostStatusToColorConverter.cs" />
     <Compile Include="IMonitorHost.cs" />
-    <Compile Include="Models\Host.cs" />
+    <Compile Include="Models\HostModel.cs" />
     <Compile Include="MonitorHost.cs" />
     <Compile Include="ViewModels\MonitorViewModel.cs" />
     <Compile Include="ViewModels\PrintViewModel.cs" />
@@ -176,6 +176,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{6e463529-a642-4199-ad7e-abe36fade56d}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

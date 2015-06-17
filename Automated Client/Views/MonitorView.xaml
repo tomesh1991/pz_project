@@ -10,12 +10,23 @@
     </UserControl.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Bottom" Text="{Binding Status}" />
-        <DockPanel  Margin="5" DockPanel.Dock="Top">
-            <TextBlock Text="Liczba widocznych hostów" DockPanel.Dock="Left" />
-            <xctk:DecimalUpDown Margin="5 0 0 0" DockPanel.Dock="Left" Value="{Binding NumberOfVisibleHosts}" />
-            <Button Name="Print" Content="Drukuj" Height="25" Width="70"  HorizontalAlignment="Right" DockPanel.Dock="Right"></Button>
-            
-        </DockPanel>
+        <Grid  Margin="5" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Liczba widocznych hostów" DockPanel.Dock="Left" />
+            <xctk:DecimalUpDown Grid.Row="0" Grid.Column="1" Margin="5 0 0 0" DockPanel.Dock="Left" Value="{Binding NumberOfVisibleHosts}" />
+            <!--<Button Name="Print" Content="Drukuj" Height="25" Width="70"  HorizontalAlignment="Right" DockPanel.Dock="Right"></Button>-->
+
+            <ComboBox Grid.Column="1" Grid.Row="1"  ItemsSource="{Binding MeasureTypes}" DisplayMemberPath="name"  SelectedItem="{Binding SelectedMeasureType}" DockPanel.Dock="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Typ pomiaru" DockPanel.Dock="Right" />
+        </Grid>
 
         <DataGrid x:Name="HostList">
             <DataGrid.RowStyle>

@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PzProj.Models;
-using PzProj.Respons;
+using DTO.Responses;
 
 namespace PzProj.Controllers
 {
